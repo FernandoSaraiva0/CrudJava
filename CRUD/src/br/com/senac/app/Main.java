@@ -11,11 +11,27 @@ public class Main {
 		
 		ContatoDAO cadastra = new ContatoDAO();
 		
-		contato.setNome("Maria");
+		contato.setNome("Maurilio");
 		contato.setTelefone("999999999");
 		contato.setEmail("teste@senac.com");
 		
-		cadastra.insert(contato);
+//		cadastra.insert(contato);
+		
+//		Utilizando o método Update
+		
+		Contato c2 = new Contato();
+		
+		c2.setNome("Marcelo de Pádua");
+		c2.setTelefone("12345");
+		c2.setEmail("teste@teste");
+		c2.setId(1);
+		
+//		cadastra.update(c2);
+		
+//		Utilizando o método delete
+		
+		cadastra.delete(3);
+		
 		// Imprimindo os dados do Select
 		for(Contato c : cadastra.selectContato()) {
 			System.out.println(c.getNome());

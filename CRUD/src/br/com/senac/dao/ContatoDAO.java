@@ -97,5 +97,77 @@ public class ContatoDAO {
 		}
 		return contatos;
 		}
+	
+	// Método para atualizar os dados do DB
+	public void update(Contato contato) {
+		
+		String query = "UPDATE contato SET nome = ?, telefone = ?, email = ?"+"WHERE id_contato = ?";
+		
+		Connection con = null;
+		PreparedStatement pstm = null;
+		
+		try {
+			// Criar conexão com bd
+			con = ConexaoFactory.createConnectionToMySQL();
+			// Preparando Query para ser Executada
+			pstm = con.prepareStatement(query);
+			pstm.setString(1, contato.getNome());
+			pstm.setString(2, contato.getTelefone());
+			pstm.setString(3, contato.getEmail());
+			pstm.setInt(4, contato.getId());
+			
+			pstm.execute();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+//			Fechando conexões
+			try {
+				if(pstm!=null) {
+					pstm.close();
+				}
+				if(con!=null) {
+					con.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	}
+	}
+	
+	// Método para apagar dados do DB
+	public void delete(int id) {
+		String query = "DELETE FROM contato WHERE id_contato = ?";
+		
+		Connection con = null;
+		PreparedStatement pstm = null;
+		
+		try {
+			// Criar conexão com bd
+			con = ConexaoFactory.createConnectionToMySQL();
+			// Preparando Query para ser Executada
+			pstm = con.prepareStatement(query);
+			
+			pstm.setInt(1, id);
+			
+			pstm.execute();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+//			Fechando conexões
+			try {
+				if(pstm!=null) {
+					pstm.close();
+				}
+				if(con!=null) {
+					con.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	}
+	}
 }
  	
+	
